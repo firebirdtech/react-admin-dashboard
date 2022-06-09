@@ -9,9 +9,11 @@ import {
   Pyramid, Customers, Kanban, Area, Bar, Pie, Financial, Line,
   ColorPicker, ColorMapping, Editor
 } from './pages'
+import { useStateContext } from './context/ContextProvider'
 
 const App = () => {
-  const activeMenu = true
+  const { activeMenu } = useStateContext();
+  
   return (
     <div>
       <BrowserRouter>
