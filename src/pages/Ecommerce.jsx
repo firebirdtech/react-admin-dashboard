@@ -85,13 +85,13 @@ const Ecommerce = () => {
               <p className='flex items-center
               gap-2 text-gray-600
               hover:drop-shadow-xl'>
-                <span><GoPrimitiveDot/></span>
+                <span><GoPrimitiveDot /></span>
                 <span>Expense</span>
               </p>
               <p className='flex items-center
               gap-2 text-green-600
               hover:drop-shadow-xl'>
-                <span><GoPrimitiveDot/></span>
+                <span><GoPrimitiveDot /></span>
                 <span>Budget</span>
               </p>
             </div>
@@ -124,8 +124,20 @@ const Ecommerce = () => {
                 mt-1">Expense</p>
               </div>
               <div className="mt-5">
-                <SparkLine currentColor="blue"/>
+                <SparkLine currentColor={"blue"} id="line-sparkLine" type="Line" height="80px" width="250px" data={SparklineAreaData} color={"blue"} />
               </div>
+              <div className='mt-10'>
+                <Button
+                  color="white"
+                  bgColor="blue"
+                  text="Download Report"
+                  borderRadius="10px"
+                />
+              </div>
+            </div>
+            <div>
+              <Stacked width="320px"
+                height="360px" />
             </div>
           </div>
         </div>
