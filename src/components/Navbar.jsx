@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { FiShoppingCart } from 'react-icons/fi';
 import { BsChatLeft } from 'react-icons/bs';
@@ -31,8 +31,29 @@ const NavButton = ({ title, customFunc, icon,
   )
 }
 
-const Navbar = ({ handleClick }) => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+const Navbar = () => {
+  const { activeMenu,
+    setActiveMenu,
+    isClicked,
+    setIsClicked,
+    handleClick,
+    screenSize,
+    setScreenSize
+  } = useStateContext();
+  
+  useEffect(() => {
+    if(screenSize < 800) {
+      setActiveMenu(false)
+    } else {
+      setActiveMenu(true)
+    }
+  }, [screenSize])
+
+  useEffect(() => {
+    const handleResize = () => setScreenSize(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    handleResize();
+  }, [])
 
   return (
     <div className='flex justify-between p-2
@@ -57,7 +78,7 @@ const Navbar = ({ handleClick }) => {
           icon={<BsChatLeft />}
           dotColor="#03C9D7" />
         <NavButton title="Notifications"
-          customFunc={() => handleClick('notifications')}
+          customFunc={() => handleClick('notification')}
           color="blue"
           icon={<RiNotification3Line />}
           dotColor="#03C9D7" />
@@ -79,9 +100,13 @@ const Navbar = ({ handleClick }) => {
               font-bold ml-1 text-14'>Michael</span>
             </p>
             <MdKeyboardArrowDown
-            className='text-gray-400 text-14'/>
+              className='text-gray-400 text-14' />
           </div>
         </TooltipComponent>
+        {isClicked.cart && <Cart />}
+        {isClicked.chat && <Chat />}
+        {isClicked.notification && <Notification />}
+        {isClicked.userProfile && <UserProfile />}
       </div>
 
     </div>
