@@ -12,19 +12,25 @@ import {
 import { useStateContext } from './context/ContextProvider'
 
 const App = () => {
-  const { activeMenu } = useStateContext();
+  const { activeMenu, themeSettings,
+  setThemeSettings, currentMode } = useStateContext();
 
   return (
-    <div>
+    <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
         <div className='flex relative dark:bg-main-dark-bg'>
           <div className='fixed right-4 bottom-4' style={{
             zIndex: '1000'
           }}>
             <TooltipComponent content="Settings" position="Top">
-              <button type='button' className='text-3xl p-3 hover:drop-shadow-xl
+              <button
+              onClick={() => {
+                setThemeSettings(true)
+              }}
+                type='button' className='text-3xl p-3 hover:drop-shadow-xl
             hover:bg-light-gray text-white'
                 style={{ background: 'grey', borderRadius: '50%' }}
+
               >
                 <FiSettings />
               </button>
@@ -40,7 +46,7 @@ const App = () => {
             </div>
           )}
           <div className={
-            `dark:bg-main-bg bg-main-bg min-h-screen w-full
+            `dark:bg-main-dark-bg bg-main-bg min-h-screen w-full
             ${activeMenu ? 'md:ml-72'
               : 'flex-2'}`}>
             <div className='fixed md:static
@@ -50,6 +56,7 @@ const App = () => {
             </div>
 
             <div>
+              {themeSettings && <ThemeSettings />}
               <Routes>
                 {/* Dashboard */}
                 <Route path="/" element={<Ecommerce />} />
@@ -59,9 +66,8 @@ const App = () => {
                 <Route path="/employees" element={<Employees />} />
                 <Route path="/customers" element={<Customers />} />
                 {/* Apps */}
-                <Route path="/kanban" element={<Kanban />} />
+                <Route path="/calendar" element={<Calendar />} />
                 <Route path="/editor" element={<Editor />} />
-                <Route path="/calender" element={<Calendar />} />
                 <Route path="/color-picker" element={<ColorPicker />} />
                 <Route path="/kanban" element={<Kanban />} />
                 {/* Charts */}
