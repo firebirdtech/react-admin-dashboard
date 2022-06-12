@@ -13,7 +13,7 @@ import { useStateContext } from './context/ContextProvider'
 
 const App = () => {
   const { activeMenu, themeSettings,
-  setThemeSettings, currentMode } = useStateContext();
+  setThemeSettings, currentMode, currentColor } = useStateContext();
 
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
@@ -29,7 +29,7 @@ const App = () => {
               }}
                 type='button' className='text-3xl p-3 hover:drop-shadow-xl
             hover:bg-light-gray text-white'
-                style={{ background: 'grey', borderRadius: '50%' }}
+                style={{ background: currentColor, borderRadius: '50%' }}
 
               >
                 <FiSettings />
